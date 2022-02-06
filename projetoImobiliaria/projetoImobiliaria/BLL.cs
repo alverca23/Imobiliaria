@@ -116,7 +116,24 @@ namespace BusinessLogicLayer
                     new SqlParameter("@Telefone", Telefone),
                     new SqlParameter("@Foto",img)
                 };
-                return dal.executarNonQuery("INSERT into funcionario (id,Nome,Apelido,Email,Morada,NIF,Telefone,img) VALUES(@Id,@Nome,@Apelido,@Email,@Morada,@Telefone,@Foto)", sqlParams);
+                return dal.executarNonQuery("INSERT into funcionario (id,Nome,Apelido,Email,Morada,NIF,Telefone,Foto) VALUES(@Id,@Nome,@Apelido,@Email,@Morada,@NIF,@Telefone,@Foto)", sqlParams);
+            }
+
+            static public int Update_funcionario(int id, string nome, string Apelido, string Email, string Morada, int NIF, int Telefone, byte[] Foto)
+            {
+                DAL dal = new DAL();
+                SqlParameter[] sqlParams = new SqlParameter[]{
+                    new SqlParameter("@Id", id),
+                    new SqlParameter("@Nome", nome),
+                    new SqlParameter("@Apelido", Apelido),
+                    new SqlParameter("@Email", Email),
+                    new SqlParameter("@Morada", Morada),
+                    new SqlParameter("@NIF", NIF),
+                    new SqlParameter("@Telefone", Telefone),
+                    new SqlParameter("@Foto", Foto)
+                };
+
+                return dal.executarNonQuery("UPDATE [Cliente] SET [Nome]=@Nome, [Apelido]=Apelido, [Email]=@Email, [Morada]=@Morada, [NIF]=@NIF, [Telefone]=@Telefone, [Foto]=@Foto WHERE [Id]=@Id", sqlParams);
             }
         }
 
