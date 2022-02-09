@@ -36,8 +36,7 @@ namespace projetoImobiliaria.Conta
 
         private void Conta_Load(object sender, EventArgs e)
         {
-            this.ActiveControl = exit_btn;
-            
+            this.ActiveControl = exit_btn;   
         }
 
         private void login_btn_Click(object sender, EventArgs e)
@@ -58,8 +57,6 @@ namespace projetoImobiliaria.Conta
                 main f1 = new main();
                 f1.Show();
             }
-
-
         }
 
         private void user_tb_Leave(object sender, EventArgs e)

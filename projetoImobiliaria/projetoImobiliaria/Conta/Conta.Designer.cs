@@ -40,10 +40,10 @@ namespace projetoImobiliaria.Conta
             // 
             // user_tb
             // 
-            this.user_tb.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.user_tb.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.user_tb.Location = new System.Drawing.Point(95, 227);
             this.user_tb.Name = "user_tb";
-            this.user_tb.Size = new System.Drawing.Size(200, 31);
+            this.user_tb.Size = new System.Drawing.Size(200, 33);
             this.user_tb.TabIndex = 2;
             this.user_tb.Text = "Username";
             this.user_tb.Enter += new System.EventHandler(this.user_tb_Enter);
@@ -51,15 +51,14 @@ namespace projetoImobiliaria.Conta
             // 
             // password_tb
             // 
-            this.password_tb.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.password_tb.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.password_tb.Location = new System.Drawing.Point(95, 298);
             this.password_tb.Name = "password_tb";
-            this.password_tb.Size = new System.Drawing.Size(200, 31);
+            this.password_tb.Size = new System.Drawing.Size(200, 33);
             this.password_tb.TabIndex = 3;
             this.password_tb.Text = "Password";
             this.password_tb.TextChanged += new System.EventHandler(this.password_tb_TextChanged);
             this.password_tb.Enter += new System.EventHandler(this.password_tb_Enter);
-            //this.password_tb.KeyDown += new System.Windows.Forms.KeyEventHandler(this.password_tb_KeyDown);
             this.password_tb.Leave += new System.EventHandler(this.password_tb_Leave);
             // 
             // login_btn
@@ -67,6 +66,7 @@ namespace projetoImobiliaria.Conta
             this.login_btn.BackColor = System.Drawing.Color.DarkTurquoise;
             this.login_btn.FlatAppearance.BorderSize = 2;
             this.login_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.login_btn.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.login_btn.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.login_btn.Location = new System.Drawing.Point(129, 382);
             this.login_btn.Name = "login_btn";
@@ -92,6 +92,7 @@ namespace projetoImobiliaria.Conta
             this.exit_btn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.exit_btn.FlatAppearance.BorderSize = 2;
             this.exit_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.exit_btn.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.exit_btn.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.exit_btn.Location = new System.Drawing.Point(129, 465);
             this.exit_btn.Name = "exit_btn";
@@ -119,8 +120,6 @@ namespace projetoImobiliaria.Conta
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Conta";
             this.Load += new System.EventHandler(this.Conta_Load);
-            //this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Conta_KeyDown);
-            //this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Conta_KeyPress);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -18,22 +18,15 @@ namespace projetoImobiliaria
             InitializeComponent();
         }
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            
-        }
-
         private void ClienteEditar_Load(object sender, EventArgs e)
         {
             this.Size = new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
             
-
             dataGridView1.DataSource = BLL.Clientes.Load(); 
 
             dataGridView1.RowTemplate.MinimumHeight = 35;
 
             dataGridView1.RowHeadersWidth = 4;
- 
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -52,14 +45,10 @@ namespace projetoImobiliaria
 
                     dataGridView1.DataSource = BLL.Clientes.Load();
 
-                    textBox1.Clear();
-                    textBox2.Clear();
-                    textBox3.Clear();
-                    textBox4.Clear();
-                    textBox5.Clear();
-                    textBox6.Clear();
-                    textBox7.Clear();
-                    textBox8.Clear();
+                    foreach(Control c in this.Controls)
+                    {
+                        ((TextBox)c).Clear();
+                    }
                 }
             }       
         }
@@ -90,27 +79,21 @@ namespace projetoImobiliaria
 
                     textBox1.Clear();
                 }
-               
             }
-               if (!existe) 
-               {
-                    MessageBox.Show("Pretende prosseguir?", "Sistema");
 
-                    BLL.Clientes.insertCliente(Convert.ToInt32(textBox1.Text), textBox2.Text, textBox3.Text, textBox4.Text, textBox8.Text, Convert.ToInt32(textBox7.Text), Convert.ToInt32(textBox6.Text), textBox5.Text);
+            if (!existe) 
+            {
+                MessageBox.Show("Pretende prosseguir?", "Sistema");
 
-                    dataGridView1.DataSource = BLL.Clientes.Load();
+                BLL.Clientes.insertCliente(Convert.ToInt32(textBox1.Text), textBox2.Text, textBox3.Text, textBox4.Text, textBox8.Text, Convert.ToInt32(textBox7.Text), Convert.ToInt32(textBox6.Text), textBox5.Text);
 
-                    textBox1.Clear();
-                    textBox2.Clear();
-                    textBox3.Clear();
-                    textBox4.Clear();
-                    textBox5.Clear();
-                    textBox6.Clear();
-                    textBox7.Clear();
-                    textBox8.Clear();
-               }
-            
-            
+                dataGridView1.DataSource = BLL.Clientes.Load();
+
+                foreach (Control c in this.Controls)
+                {
+                    ((TextBox)c).Clear();
+                }
+            }        
         }
 
         private void button3_Click(object sender, EventArgs e)
