@@ -293,31 +293,66 @@ namespace BusinessLogicLayer
                 return dal.executarReader("SELECT * FROM Imoveis", null);
             }
 
-            static public int register(int Id, string proprietario,string tipo,int preco, int proposta_atual, string Localidade, string Estado, int Area_Util, int Area_Bruta,string Estado_Habitacao,int Quartos,int Casas_Banho,int Anos_Construcao,char Certificado_Energetico, byte[] img, bool Ativo)
+            static public int Inserir_Imoveis(int id, string proprietario, string tipo, int preco, int proposta_atual, string localidade, string estado, int area_util, int area_bruta, string estado_habitacao, int quartos, int casas_banho, int anos_construcao, char certificado_energetico, byte[] img, bool ativo)
             {
                 DAL dal = new DAL();
                 SqlParameter[] sqlParams = new SqlParameter[]{
-                    new SqlParameter("@Id",Id),
-                    new SqlParameter("@proprietario", proprietario),
-                    new SqlParameter("@tipo",tipo),
-                    new SqlParameter("@preco",preco),
-                    new SqlParameter("@proposta_atual", proposta_atual),
-                    new SqlParameter("@Localidade", Localidade),
-                    new SqlParameter("@Estado", Estado),
-                    new SqlParameter("@Area_Util", Area_Util),
-                    new SqlParameter("@Area_Bruta", Area_Bruta),
-                    new SqlParameter("@Estado_Habitacao", Estado_Habitacao),
-                    new SqlParameter("@Quartos", Quartos),
-                    new SqlParameter("@Casas_Banho", Casas_Banho),
-                    new SqlParameter("@Anos_Construcao", Anos_Construcao),
-                    new SqlParameter("@Certificado_Energetico", Certificado_Energetico),
-                    new SqlParameter("@Foto",img),
-                    new SqlParameter("@Ativo", Ativo)
+                    new SqlParameter("@ID", id),
+                    new SqlParameter("@Proprietario", proprietario),
+                    new SqlParameter("@Tipo", tipo),
+                    new SqlParameter("@Preco", preco),
+                    new SqlParameter("@Proposta_Atual", proposta_atual),
+                    new SqlParameter("@Localidade", localidade),
+                    new SqlParameter("@Estado", estado),
+                    new SqlParameter("@Area_Util", area_util),
+                    new SqlParameter("@Area_Bruta", area_bruta),
+                    new SqlParameter("@Estado_Habitacao", estado_habitacao),
+                    new SqlParameter("@Quartos", quartos),
+                    new SqlParameter("@Casas_Banho", casas_banho),
+                    new SqlParameter("@Anos_Construcao", anos_construcao),
+                    new SqlParameter("@Certificado_Energetico", certificado_energetico),
+                    new SqlParameter("@Foto", img),
+                    new SqlParameter("@Ativo", ativo)
                 };
-                return dal.executarNonQuery("INSERT into Imoveis (Id,proprietario,tipo,preco,proposta_atual,Localidade,Estado,Area_Util,Area_Bruta,Estado_Habitacao,Quartos,Casas_Banho,Anos_Construcao,Certificado_Energetico,Foto,Ativo) VALUES(@Id,@proprietario,@proposta_atual,@Localidade,@Estado,@Area_Util,@Area_Bruta,@Estado_Habitacao,@Quartos,@Casas_Banho,@Anos_Construcao,@Certificado_Energet,@Foto,@Ativo)", sqlParams);
+
+                return dal.executarNonQuery("INSERT INTO Imoveis (Id,proprietario,tipo,preco,proposta_atual,Localidade,Estado,Area_Util,Area_Bruta,Estado_Habitacao,Quartos,Casas_Banho,Anos_Construcao,Certificado_Energetico,foto,Ativo) VALUES(@ID,@Proprietario,@Tipo,@Preco,@Proposta_Atual,@Localidade,@Estado,@Area_Util,@Area_Bruta,@Estado_Habitacao,@Quartos,@Casas_Banho,@Anos_Construcao,@Certificado_Energetico,@Foto,@Ativo)", sqlParams);
             }
 
+            static public int Atualizar_Imovel(int id, string proprietario, string tipo, int preco, int proposta_atual, string localidade, string estado, int area_util, int area_bruta, string estado_habitacao, int quartos, int casas_banho, int anos_construcao, char certificado_energetico, byte[] img, bool ativo)
+            {
+                DAL dal = new DAL();
+                SqlParameter[] sqlParams = new SqlParameter[]{
+                    new SqlParameter("@ID", id),
+                    new SqlParameter("@Proprietario", proprietario),
+                    new SqlParameter("@Tipo", tipo),
+                    new SqlParameter("@Preco", preco),
+                    new SqlParameter("@Proposta_Atual", proposta_atual),
+                    new SqlParameter("@Localidade", localidade),
+                    new SqlParameter("@Estado", estado),
+                    new SqlParameter("@Area_Util", area_util),
+                    new SqlParameter("@Area_Bruta", area_bruta),
+                    new SqlParameter("@Estado_Habitacao", estado_habitacao),
+                    new SqlParameter("@Quartos", quartos),
+                    new SqlParameter("@Casas_Banho", casas_banho),
+                    new SqlParameter("@Anos_Construcao", anos_construcao),
+                    new SqlParameter("@Certificado_Energetico", certificado_energetico),
+                    new SqlParameter("@Foto", img),
+                    new SqlParameter("@Ativo", ativo)
+                };
 
+                return dal.executarNonQuery("UPDATE [Imoveis] SET [Id]=@ID, [Proprietario]=@proprietario, [tipo]=@Tipo, [preco]=@Preco, [proposta_atual]=@Proposta_Atual, [Localidade]=@Localidade, [Estado]=@Estado, [Area_Util]=@Area_Util, [Area_Bruta]=@Area_Bruta, [Estado_Habitacao]=@Estado_Habitacao, [Quartos]=@Quartos, [Casas_Banho]=@Casas_Banho, [Anos_Construcao]=@Anos_Construcao, [Certificado_Energetico]=@Certificado_Energetico, [foto]=@Foto, [Ativo]=@Ativo WHERE Id=@ID", sqlParams);
+            }
+
+            static public int Desativar_imovel(int id, bool Ativo)
+            {
+                DAL dal = new DAL();
+                SqlParameter[] sqlParams = new SqlParameter[]{
+                    new SqlParameter("@Id", id),
+                    new SqlParameter("@Ativo", Ativo)
+                };
+
+                return dal.executarNonQuery("UPDATE [Imoveis] SET [Ativo]=@Ativo WHERE [Id]=@Id", sqlParams);
+            }
 
         }
     }
