@@ -162,7 +162,6 @@ namespace BusinessLogicLayer
 
         public class Clientes
         {
-
             static public DataTable Load()
             {
                 DAL dal = new DAL();
@@ -210,7 +209,7 @@ namespace BusinessLogicLayer
                     new SqlParameter("@parametro", parametro + "%")
                 };
 
-                return dal.executarReader("SELECT * FROM Cliente WHERE (Nome LIKE @parametro) OR (Sobrenome LIKE @parametro) OR (Morada LIKE @parametro) OR (Email LIKE @parametro) OR (Telefone LIKE @parametro) OR (Localidade LIKE @parametro)", sqlParams);
+                return dal.executarReader("SELECT * FROM Cliente WHERE (Id LIKE @parametro) OR (Nome LIKE @parametro) OR (Sobrenome LIKE @parametro) OR (Morada LIKE @parametro) OR (Email LIKE @parametro) OR (Telefone LIKE @parametro) OR (Localidade LIKE @parametro)", sqlParams);
             }
 
             static public DataTable queryCliente(int id) {
@@ -354,6 +353,76 @@ namespace BusinessLogicLayer
                 return dal.executarNonQuery("UPDATE [Imoveis] SET [Ativo]=@Ativo WHERE [Id]=@Id", sqlParams);
             }
 
+        }
+
+        public class Calendario
+        {
+            static public DataTable Load()
+            {
+                DAL dal = new DAL();
+                return dal.executarReader("SELECT * FROM Servico", null);
+            }
+
+            static public int Inserir_Data(int ID, DateTime data, string horas, string funcionario, string localidade)
+            {
+                DAL dal = new DAL();
+                SqlParameter[] sqlParams = new SqlParameter[] {
+                    new SqlParameter("@ID", ID),
+                    new SqlParameter("@Data", data),
+                    new SqlParameter("@Horas", horas),
+                    new SqlParameter("@Funcionario", funcionario),
+                    new SqlParameter("@Localidade", localidade)
+                };
+
+                return dal.executarNonQuery("INSERT INTO Agendamentos (ID, Data, Horas, Funcionario, Localidade) VALUES (@ID, @Data, @Horas, @Funcionario, @Localidade)", sqlParams);
+            }
+
+            static public DataTable Load_Funcionarios()
+            {
+                DAL dal = new DAL();
+                return dal.executarReader("SELECT Nome FROM Funcionarios", null);
+            }
+
+            static public DataTable CheckDayStatus()
+            {
+                DAL dal = new DAL();
+                return dal.executarReader("SELECT Nome, Data FROM Servico", null);
+            }
+
+            static public DataTable GetTodayEntrance(string nome, string data)
+            {
+                DAL dal = new DAL();
+                SqlParameter[] sqlParams = new SqlParameter[] {
+                    new SqlParameter("@Nome", nome),
+                    new SqlParameter("@Data", data)
+                };
+                return dal.executarReader("SELECT Entrada FROM Servico WHERE Nome=@Nome AND Data=@Data", sqlParams);
+            }
+
+            static public int EntradaFunc(string nome, string data, string entrada)
+            {
+                DAL dal = new DAL();
+                SqlParameter[] sqlParams = new SqlParameter[] {
+                    new SqlParameter("@Nome", nome),
+                    new SqlParameter("@Data", data),
+                    new SqlParameter("@Entrada", entrada)
+                };
+
+                return dal.executarNonQuery("INSERT INTO Servico (Nome, Data, Entrada) VALUES (@Nome, @Data, @Entrada)", sqlParams);
+            }
+
+            static public int SaidaFunc(string nome, string data, string saida, string tTrabalho)
+            {
+                DAL dal = new DAL();
+                SqlParameter[] sqlParams = new SqlParameter[] {
+                    new SqlParameter("@Nome", nome),
+                    new SqlParameter("@Data", data),
+                    new SqlParameter("@Saida", saida),
+                    new SqlParameter("@Tempo_Trabalho", tTrabalho)
+                };
+
+                return dal.executarNonQuery("UPDATE [Servico] SET [Saida]=@Saida, [Tempo_Trabalho]=@Tempo_Trabalho WHERE Nome=@Nome AND Data=@Data", sqlParams);
+            }
         }
     }
 }

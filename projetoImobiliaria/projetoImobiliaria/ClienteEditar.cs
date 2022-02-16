@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BusinessLogicLayer;
 
+
 namespace projetoImobiliaria
 {
     public partial class ClienteEditar : Form
@@ -20,6 +21,7 @@ namespace projetoImobiliaria
 
         private void ClienteEditar_Load(object sender, EventArgs e)
         {
+            
             this.Size = new Size(Screen.PrimaryScreen.Bounds.Width, Screen.PrimaryScreen.Bounds.Height);
             
             dataGridView1.DataSource = BLL.Clientes.Load(); 
@@ -55,31 +57,41 @@ namespace projetoImobiliaria
 
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            textBox1.Text = dataGridView1.Rows[e.RowIndex].Cells["Id"].Value.ToString();
-            textBox2.Text = dataGridView1.Rows[e.RowIndex].Cells["Nome"].Value.ToString();
-            textBox3.Text = dataGridView1.Rows[e.RowIndex].Cells["Sobrenome"].Value.ToString();
-            textBox4.Text = dataGridView1.Rows[e.RowIndex].Cells["Morada"].Value.ToString();
-            textBox8.Text = dataGridView1.Rows[e.RowIndex].Cells["Email"].Value.ToString();
-            textBox7.Text = dataGridView1.Rows[e.RowIndex].Cells["Telefone"].Value.ToString();
-            textBox6.Text = dataGridView1.Rows[e.RowIndex].Cells["NIF"].Value.ToString();
-            textBox5.Text = dataGridView1.Rows[e.RowIndex].Cells["Localidade"].Value.ToString();
+            if (e.RowIndex >= 0)
+            {
+                textBox1.Text = dataGridView1.Rows[e.RowIndex].Cells["Id"].Value.ToString();
+                textBox2.Text = dataGridView1.Rows[e.RowIndex].Cells["Nome"].Value.ToString();
+                textBox3.Text = dataGridView1.Rows[e.RowIndex].Cells["Sobrenome"].Value.ToString();
+                textBox4.Text = dataGridView1.Rows[e.RowIndex].Cells["Morada"].Value.ToString();
+                textBox8.Text = dataGridView1.Rows[e.RowIndex].Cells["Email"].Value.ToString();
+                textBox7.Text = dataGridView1.Rows[e.RowIndex].Cells["Telefone"].Value.ToString();
+                textBox6.Text = dataGridView1.Rows[e.RowIndex].Cells["NIF"].Value.ToString();
+                textBox5.Text = dataGridView1.Rows[e.RowIndex].Cells["Localidade"].Value.ToString();
+            }
+            
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            bool existe = false;
-
-            foreach (DataGridViewRow row in dataGridView1.Rows)
+            if (String.IsNullOrEmpty(textBox1.Text) || String.IsNullOrEmpty(textBox2.Text) || String.IsNullOrEmpty(textBox3.Text) || String.IsNullOrEmpty(textBox4.Text) || String.IsNullOrEmpty(textBox5.Text) || String.IsNullOrEmpty(textBox6.Text) || String.IsNullOrEmpty(textBox7.Text) || String.IsNullOrEmpty(textBox7.Text))
             {
-                if (Convert.ToInt32(row.Cells[0].Value) == Convert.ToInt32(textBox1.Text))
-                {
-                    MessageBox.Show("Já existe um utilizador com esse ID", "Erro");
-
-                    existe = true;
-
-                    textBox1.Clear();
-                }
+                MessageBox.Show("Tem de preencher todos os campos", "Informação");
             }
+            else
+            {
+                bool existe = false;
+
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    if (Convert.ToInt32(row.Cells[0].Value) == Convert.ToInt32(textBox1.Text))
+                    {
+                        MessageBox.Show("Já existe um utilizador com esse ID", "Erro");
+
+                        existe = true;
+
+                        textBox1.Clear();
+                    }
+                }
 
             if (!existe) 
             {
@@ -93,20 +105,34 @@ namespace projetoImobiliaria
                 {
                     ((TextBox)c).Clear();
                 }
-            }        
+            }
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            DialogResult r = MessageBox.Show("Tem a certeza que pretende eliminar este cliente?", "Confirmação", MessageBoxButtons.YesNo);
-            
-            if (r == DialogResult.Yes)
+            if (String.IsNullOrEmpty(textBox1.Text) || String.IsNullOrEmpty(textBox2.Text) || String.IsNullOrEmpty(textBox3.Text) || String.IsNullOrEmpty(textBox4.Text) || String.IsNullOrEmpty(textBox5.Text) || String.IsNullOrEmpty(textBox6.Text) || String.IsNullOrEmpty(textBox7.Text) || String.IsNullOrEmpty(textBox7.Text))
             {
-                BLL.Clientes.Desativar_Cliente(Convert.ToInt32(textBox1.Text));
-
-                dataGridView1.DataSource = BLL.Clientes.Load();
+                MessageBox.Show("Para remover tem de preencher todos os campos"),MessageBoxIcon.Error;
+                
             }
-             
+            else
+            {
+
+                DialogResult r = MessageBox.Show("Tem a certeza que pretende eliminar este cliente?", "Confirmação", MessageBoxButtons.YesNo);
+            
+                if (r == DialogResult.Yes)
+                {
+                    BLL.Clientes.Desativar_Cliente(Convert.ToInt32(textBox1.Text));
+
+                    dataGridView1.DataSource = BLL.Clientes.Load();
+                }
+
+                foreach (var txtitem in this.Controls.OfType<TextBox>())
+                {
+                    txtitem.Clear();
+                }
+            }
         }
     }
 }

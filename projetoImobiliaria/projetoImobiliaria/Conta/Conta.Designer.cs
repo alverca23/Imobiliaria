@@ -63,7 +63,7 @@ namespace projetoImobiliaria.Conta
             // 
             // login_btn
             // 
-            this.login_btn.BackColor = System.Drawing.Color.DarkTurquoise;
+            this.login_btn.BackColor = System.Drawing.Color.DodgerBlue;
             this.login_btn.FlatAppearance.BorderSize = 2;
             this.login_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.login_btn.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -88,7 +88,7 @@ namespace projetoImobiliaria.Conta
             // 
             // exit_btn
             // 
-            this.exit_btn.BackColor = System.Drawing.Color.DarkTurquoise;
+            this.exit_btn.BackColor = System.Drawing.Color.DodgerBlue;
             this.exit_btn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.exit_btn.FlatAppearance.BorderSize = 2;
             this.exit_btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;

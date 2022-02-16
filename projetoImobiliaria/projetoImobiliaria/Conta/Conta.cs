@@ -15,24 +15,10 @@ namespace projetoImobiliaria.Conta
 {
     public partial class Conta : Form
     {
-        [DllImport("Gdi32.dLL", EntryPoint = "CreateRoundRectRgn")]
-
-        private static extern IntPtr CreateRoundRectRgn
-
-        (
-        int nLeftRect,
-        int nTopRect,
-        int nRightRect,
-        int nBottomRect,
-        int nWithEllipse,
-        int nHeightEllipse
-        );
 
         public Conta()
         {
-            InitializeComponent();
-            Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
-        }
+            InitializeComponent();        }
 
         private void Conta_Load(object sender, EventArgs e)
         {
