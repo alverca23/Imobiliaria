@@ -35,7 +35,7 @@ namespace projetoImobiliaria
         {
             if (String.IsNullOrEmpty(textBox1.Text) || String.IsNullOrEmpty(textBox2.Text) || String.IsNullOrEmpty(textBox3.Text) || String.IsNullOrEmpty(textBox4.Text) || String.IsNullOrEmpty(textBox5.Text) || String.IsNullOrEmpty(textBox6.Text) || String.IsNullOrEmpty(textBox7.Text) || String.IsNullOrEmpty(textBox7.Text))   
             {
-                MessageBox.Show("Tem de preencher todos os campos", "Informação");
+                MessageBox.Show("Para remover tem de preencher os campos", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning); ;
             }
             else
             {
@@ -75,7 +75,7 @@ namespace projetoImobiliaria
         {
             if (String.IsNullOrEmpty(textBox1.Text) || String.IsNullOrEmpty(textBox2.Text) || String.IsNullOrEmpty(textBox3.Text) || String.IsNullOrEmpty(textBox4.Text) || String.IsNullOrEmpty(textBox5.Text) || String.IsNullOrEmpty(textBox6.Text) || String.IsNullOrEmpty(textBox7.Text) || String.IsNullOrEmpty(textBox7.Text))
             {
-                MessageBox.Show("Tem de preencher todos os campos", "Informação");
+                MessageBox.Show("Tem de preencher os campos", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {
@@ -113,8 +113,7 @@ namespace projetoImobiliaria
         {
             if (String.IsNullOrEmpty(textBox1.Text) || String.IsNullOrEmpty(textBox2.Text) || String.IsNullOrEmpty(textBox3.Text) || String.IsNullOrEmpty(textBox4.Text) || String.IsNullOrEmpty(textBox5.Text) || String.IsNullOrEmpty(textBox6.Text) || String.IsNullOrEmpty(textBox7.Text) || String.IsNullOrEmpty(textBox7.Text))
             {
-                MessageBox.Show("Para remover tem de preencher todos os campos"),MessageBoxIcon.Error;
-                
+                MessageBox.Show("Para remover têm de preencher os campos", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
             else
             {

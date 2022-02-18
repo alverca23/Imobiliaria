@@ -30,16 +30,17 @@ namespace projetoImobiliaria.Conta
             if (user_tb.Text == "Username" && password_tb.Text == "Password")
             {
                 //MessageBox.Show("Introduza os dados de acesso");
-                globais.ADM = true;
+                //globais.ADM = true;
                 main f1 = new main();
                 f1.Show();
             }
 
             DataTable dt = BLL.Login.login_info_request(user_tb.Text, password_tb.Text);
 
-            if(dt.Rows.Count > 0)
+            if (dt.Rows.Count > 0)
             {
-                globais.ADM = (bool)dt.Rows[0][3];
+                globais.idAtual = Convert.ToInt32(dt.Rows[0][0]);
+                globais.ADM = false; //(bool)dt.Rows[0][3]
                 main f1 = new main();
                 f1.Show();
             }

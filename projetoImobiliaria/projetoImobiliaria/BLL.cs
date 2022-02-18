@@ -377,26 +377,20 @@ namespace BusinessLogicLayer
                 return dal.executarNonQuery("INSERT INTO Agendamentos (ID, Data, Horas, Funcionario, Localidade) VALUES (@ID, @Data, @Horas, @Funcionario, @Localidade)", sqlParams);
             }
 
-            static public DataTable Load_Funcionarios()
-            {
-                DAL dal = new DAL();
-                return dal.executarReader("SELECT Nome FROM Funcionarios", null);
-            }
-
             static public DataTable CheckDayStatus()
             {
                 DAL dal = new DAL();
                 return dal.executarReader("SELECT Nome, Data FROM Servico", null);
             }
 
-            static public DataTable GetTodayEntrance(string nome, string data)
+            static public DataTable GetTodayEntrance(int id, string data)
             {
                 DAL dal = new DAL();
                 SqlParameter[] sqlParams = new SqlParameter[] {
-                    new SqlParameter("@Nome", nome),
+                    new SqlParameter("@ID", id),
                     new SqlParameter("@Data", data)
                 };
-                return dal.executarReader("SELECT Entrada FROM Servico WHERE Nome=@Nome AND Data=@Data", sqlParams);
+                return dal.executarReader("SELECT Entrada FROM Servico WHERE ID=@ID AND Data=@Data", sqlParams);
             }
 
             static public int EntradaFunc(string nome, string data, string entrada)
