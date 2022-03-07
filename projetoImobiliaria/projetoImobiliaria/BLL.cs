@@ -51,6 +51,16 @@ namespace BusinessLogicLayer
 
                 return dal.executarReader("SELECT * FROM Conta WHERE user_name=@user_name AND password=@password", sqlParams);
             }
+
+            static public DataTable User_info(String user_name)
+            {
+                DAL dal = new DAL();
+                SqlParameter[] sqlParams = new SqlParameter[]{
+                    new SqlParameter("@user_name", user_name),
+                };
+
+                return dal.executarReader("SELECT * FROM Conta WHERE user_name=@user_name", sqlParams);
+            }
         }
 
         public class Funcionarios
@@ -59,6 +69,12 @@ namespace BusinessLogicLayer
             {
                 DAL dal = new DAL();
                 return dal.executarReader("SELECT * FROM funcionario", null);
+            }
+
+            static public DataTable Load_Nomes()
+            {
+                DAL dal = new DAL();
+                return dal.executarReader("SELECT Nome FROM funcionario", null);
             }
 
             static public int add_func(string nome, string email, int telefone, string morada, int NIF)
@@ -363,7 +379,13 @@ namespace BusinessLogicLayer
                 return dal.executarReader("SELECT * FROM Servico", null);
             }
 
-            static public int Inserir_Data(int ID, DateTime data, string horas, string funcionario, string localidade)
+            static public DataTable Load_Agendamentos()
+            {
+                DAL dal = new DAL();
+                return dal.executarReader("SELECT * FROM Agendamentos", null);
+            }
+
+            static public int Inserir_Data(int ID, string data, string horas, string funcionario, string localidade)
             {
                 DAL dal = new DAL();
                 SqlParameter[] sqlParams = new SqlParameter[] {
@@ -393,29 +415,67 @@ namespace BusinessLogicLayer
                 return dal.executarReader("SELECT Entrada FROM Servico WHERE ID=@ID AND Data=@Data", sqlParams);
             }
 
-            static public int EntradaFunc(string nome, string data, string entrada)
+            static public int EntradaFunc(int id, string nome, string data, string entrada)
             {
                 DAL dal = new DAL();
                 SqlParameter[] sqlParams = new SqlParameter[] {
+                    new SqlParameter("@ID", id),
                     new SqlParameter("@Nome", nome),
                     new SqlParameter("@Data", data),
                     new SqlParameter("@Entrada", entrada)
                 };
 
-                return dal.executarNonQuery("INSERT INTO Servico (Nome, Data, Entrada) VALUES (@Nome, @Data, @Entrada)", sqlParams);
+                return dal.executarNonQuery("INSERT INTO Servico (ID, Nome, Data, Entrada) VALUES (@ID, @Nome, @Data, @Entrada)", sqlParams);
             }
 
-            static public int SaidaFunc(string nome, string data, string saida, string tTrabalho)
+            static public int SaidaFunc(int id, string data, string saida, string tTrabalho)
             {
                 DAL dal = new DAL();
                 SqlParameter[] sqlParams = new SqlParameter[] {
-                    new SqlParameter("@Nome", nome),
+                    new SqlParameter("@ID", id),
                     new SqlParameter("@Data", data),
                     new SqlParameter("@Saida", saida),
                     new SqlParameter("@Tempo_Trabalho", tTrabalho)
                 };
 
-                return dal.executarNonQuery("UPDATE [Servico] SET [Saida]=@Saida, [Tempo_Trabalho]=@Tempo_Trabalho WHERE Nome=@Nome AND Data=@Data", sqlParams);
+                return dal.executarNonQuery("UPDATE [Servico] SET [Saida]=@Saida, [Tempo_Trabalho]=@Tempo_Trabalho WHERE ID=@ID AND Data=@Data", sqlParams);
+            }
+        }
+
+        public class Agendamentos
+        {
+            static public DataTable Load()
+            {
+                DAL dal = new DAL();
+                return dal.executarReader("SELECT * FROM Agendamentos", null);
+            }
+
+            static public int Atualizar_agendamentos(int ID, string data, string horas, string funcionario, string localidade)
+            {
+                DAL dal = new DAL();
+                SqlParameter[] sqlParams = new SqlParameter[]{
+                     new SqlParameter("@ID", ID),
+                    new SqlParameter("@Data", data),
+                    new SqlParameter("@Horas", horas),
+                    new SqlParameter("@Funcionario", funcionario),
+                    new SqlParameter("@Localidade", localidade)
+                };
+
+                return dal.executarNonQuery("UPDATE [Agendamentos] SET [ID]=@ID, [Data]=@Data, [Horas]=@Horas, [Funcionario]=@Funcionario, [Localidade]=@Localidade WHERE ID=@ID", sqlParams);
+            }
+
+            static public int delete_agendamento(int ID, string data, string horas, string funcionario, string localidade)
+            {
+                DAL dal = new DAL();
+                SqlParameter[] sqlParams = new SqlParameter[]{
+                    new SqlParameter("@ID", ID),
+                    new SqlParameter("@Data", data),
+                    new SqlParameter("@Horas", horas),
+                    new SqlParameter("@Funcionario", funcionario),
+                    new SqlParameter("@Localidade", localidade)
+
+            };
+                return dal.executarNonQuery("Delete From Agendamentos WHERE[ID]=@ID", sqlParams);
             }
         }
     }

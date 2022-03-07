@@ -15,10 +15,25 @@ namespace projetoImobiliaria.Conta
 {
     public partial class Conta : Form
     {
+        [DllImport("Gdi32.dLL", EntryPoint = "CreateRoundRectRgn")]
+
+        private static extern IntPtr CreateRoundRectRgn
+
+        (
+        int nLeftRect,
+        int nTopRect,
+        int nRightRect,
+        int nBottomRect,
+        int nWithEllipse,
+        int nHeightEllipse
+        );
 
         public Conta()
         {
-            InitializeComponent();        }
+            InitializeComponent();
+            Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
+
+        }
 
         private void Conta_Load(object sender, EventArgs e)
         {
@@ -26,23 +41,27 @@ namespace projetoImobiliaria.Conta
         }
 
         private void login_btn_Click(object sender, EventArgs e)
-        {
+        {  
             if (user_tb.Text == "Username" && password_tb.Text == "Password")
             {
-                //MessageBox.Show("Introduza os dados de acesso");
-                //globais.ADM = true;
-                main f1 = new main();
-                f1.Show();
+                MessageBox.Show("Introduza os dados de acesso", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-
-            DataTable dt = BLL.Login.login_info_request(user_tb.Text, password_tb.Text);
-
-            if (dt.Rows.Count > 0)
+            else
             {
-                globais.idAtual = Convert.ToInt32(dt.Rows[0][0]);
-                globais.ADM = false; //(bool)dt.Rows[0][3]
-                main f1 = new main();
-                f1.Show();
+                DataTable dt = BLL.Login.login_info_request(user_tb.Text, password_tb.Text);
+
+                if (dt.Rows.Count > 0)
+                {
+                    globais.contaAtual = user_tb.Text;
+                    globais.idAtual = Convert.ToInt32(dt.Rows[0][0]);
+                    globais.ADM = Convert.ToBoolean(dt.Rows[0][3]);
+                    main f1 = new main();
+                    f1.Show();
+                }
+                else
+                {
+                    MessageBox.Show("Dados de acesso errados", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
             }
         }
 
@@ -87,6 +106,11 @@ namespace projetoImobiliaria.Conta
         private void button1_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void Conta_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
         }
     }
 }
