@@ -60,7 +60,7 @@ namespace projetoImobiliaria.Conta
                 }
                 else
                 {
-                    MessageBox.Show("Dados de acesso errados", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Dados de acesso errados", "Aviso", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
